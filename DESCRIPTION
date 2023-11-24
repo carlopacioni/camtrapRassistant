@@ -2,8 +2,8 @@ Package: camtrapRassistant
 Title: A R package that assists camtrapR by providing more functionalities and flexibility
 Version: 0.0.0.9000
 Authors@R: c(
-    person("Carlo", "Pacioni", email="carlo.pacioni@gmail.com", role=c("aut", "cre"))
-    person("Luke", "Emerson", role = "ctb")
+    person("Carlo", "Pacioni", email="carlo.pacioni@gmail.com", role=c("aut", "cre")),
+    person("Luke", "Emerson", role = "ctb"),
     person("Sachini", "Kaushakya", role = "ctb")
     )
 Description: The main additional functionalities offered by camtrapRassistant are
@@ -11,7 +11,6 @@ Description: The main additional functionalities offered by camtrapRassistant ar
     detections and use counts/group as criteria for independence, and will extend
     record tables based on these multiple detection or reformat tables where 
     metadata on detection is provided in different columns.
-    
 License: GPL (>= 2)
 Depends: R (>= 3.5.0)
 SystemRequirements: ExifTool
@@ -22,3 +21,5 @@ RoxygenNote: 7.2.3
 Imports: 
     data.table,
     parallel
+URL: https://github.com/carlopacioni/camtrapRassistant
+BugReports: https://github.com/carlopacioni/camtrapRassistant/issues
