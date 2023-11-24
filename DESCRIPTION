@@ -1,12 +1,24 @@
 Package: camtrapRassistant
-Title: What the Package Does (One Line, Title Case)
+Title: A R package that assists camtrapR by providing more functionalities and flexibility
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: c(
+    person("Carlo", "Pacioni", email="carlo.pacioni@gmail.com", role=c("aut", "cre"))
+    person("Luke", "Emerson", role = "ctb")
+    person("Sachini", "Kaushakya", role = "ctb")
+    )
+Description: The main additional functionalities offered by camtrapRassistant are
+    the abilities of using more complex folder structure to extract metadata on 
+    detections and use counts/group as criteria for independence, and will extend
+    record tables based on these multiple detection or reformat tables where 
+    metadata on detection is provided in different columns.
+    
+License: GPL (>= 2)
+Depends: R (>= 3.5.0)
+SystemRequirements: ExifTool
+        (http://www.sno.phy.queensu.ca/~phil/exiftool/)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Imports: 
+    data.table,
+    parallel
