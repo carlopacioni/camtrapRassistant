@@ -973,6 +973,9 @@ assessTemporalIndependence <- function(intable,
                                        minDeltaTime,
                                        countsName) {
 
+
+  # Resolve no visible global function
+  DateTimeOriginal <- J <- delta.time.secs <- NULL
   ############################ Helper function #################################
   extact_sel_groups <- function(i, sel.groups) return(as.list(sel.groups[, i]))
 
