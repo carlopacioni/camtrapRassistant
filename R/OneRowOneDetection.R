@@ -5,7 +5,7 @@
 #'
 #' \strong{NOTE}: This function is currently possibly slow (a few mins) for
 #' recortable that are more than 1E4, so be patient!
-#' @inheritParams recordTable,assassessTemporalIndependence
+#' @inheritParams recordTable
 #' @return record table (data.table)
 #' @import data.table
 #' @export
