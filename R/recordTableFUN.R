@@ -39,7 +39,7 @@ recordTableFUN <- function( inDir,
 
   checkForSpacesInColumnNames(stationCol = stationCol)
 
-  if(class(StationIDfrom) != "character"){stop("StationIDfrom must be of class 'character'", call. = FALSE)}
+  if(!is.character(StationIDfrom)){stop("StationIDfrom must be of class 'character'", call. = FALSE)}
   if(StationIDfrom %in% c("filename", "directory") == FALSE) {stop("StationIDfrom can only be 'filename', 'directory'", call. = FALSE)}
   if(StationIDfrom == "directory") hasStationFolders <- TRUE else hasStationFolders <- FALSE
 
