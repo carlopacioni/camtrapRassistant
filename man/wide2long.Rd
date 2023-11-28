@@ -41,11 +41,11 @@ used. For example, when the metatags describe groups on individuals but the
 desired end point is one row for each individuals. The user has to careful think
 in which order to use these function. See the second example for this situation.
 
-\bold{Note} that when \code{pattern} enconter mutliple coluumns names these are
+\bold{Note} that when \code{pattern} encounter multiple columns names these are
 grouped in the same order as the are encountered. In the example below,
 "Ind1Species" and "Ind1Sex" are keep together because these are encountered in
 this order, and before "Ind2Species" and "Ind2Sex". \code{data.table::setcolorder}
-can be used to set the order of the columns if needs be \link[see ?data.table:setcolorder]{see ?data.table::setcolorder}.
+can be used to set the order of the columns if needs be (see \link[data.table:setcolorder]{data.table::setcolorder}).
 }
 \examples{
 # make up a recordTable where multiple individuals in the same image
