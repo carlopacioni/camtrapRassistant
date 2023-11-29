@@ -967,6 +967,7 @@ parseDir <- function(intable, directoryInfoPositions) {
 #'@param cameraCol Character. The name of the camera column (e.g. "Camera")
 #'@inheritParams recordTable
 #'@import data.table
+#'@import utils
 #'@export
 assessTemporalIndependence <- function(intable,
                                        deltaTimeComparedTo,

@@ -21,6 +21,7 @@ RoxygenNote: 7.2.3
 Imports: 
     data.table,
     methods,
+    utils,
     parallel
 URL: https://github.com/carlopacioni/camtrapRassistant
 BugReports: https://github.com/carlopacioni/camtrapRassistant/issues
