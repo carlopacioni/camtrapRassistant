@@ -1,4 +1,5 @@
 .onAttach <- function(...) {
+  d2 <- NULL
   # adapted from http://thecoatlessprofessor.com/programming/automatically-check-if-r-package-is-the-latest-version-on-package-load/. Thank you!
 
   # Avoid running if in batch job / user not present

@@ -25,6 +25,8 @@ recordTableFUN <- function( inDir,
                             countsName
 )
 {
+  #Resolve no visible global variable
+  Date <- DateTimeOriginal <- Time <- delta.time.secs <- delta.time.mins <- delta.time.hours <- delta.time.days <- NULL
   #################### To DO ##########################################
   # add checks for new arguments
 

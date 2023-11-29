@@ -21,6 +21,9 @@ recordTable.par <- function(inDir,
                         ncores
 )
 {
+  # Resolve no visible global variable issue
+  Time <- Date <- DateTimeOriginal <- delta.time.secs <- delta.time.mins <- delta.time.hours <- NULL
+  delta.time.days <- independent <- rn <- NULL
 
   wd0 <- getwd()
   on.exit(setwd(wd0))
