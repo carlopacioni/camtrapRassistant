@@ -205,11 +205,10 @@ separateMultipleSpecies <- function(intable,
   }
   return(intable)
 }
-
-
-
-
 # add station and camera id to metadata table
+#' Add station camera ID
+#'
+#' @importFrom methods hasArg
 
 addStationCameraID <- function(intable,
                                dirs_short,
@@ -304,6 +303,10 @@ checkDateTimeOriginal <- function (intable, dirs_short, i){
   # Note to self: this may also be done outside the station loop, after the final record table is assembled. Saves a few executions of this function.
 
   removeDuplicatesOfRecords <- function(metadata.tmp, removeDuplicateRecords, camerasIndependent, stationCol, speciesCol, cameraCol){
+
+    #Resolve no visible global variable
+    countsName <- NULL
+
           if(isTRUE(removeDuplicateRecords)){
             if(isTRUE(camerasIndependent)){
               remove.tmp <- which(
@@ -378,6 +381,7 @@ createDateRangeTable <- function(cam.op,
                                  maxNumberDays_tmp,
                                  timeZone_tmp)
                                  {
+
 
   cam.tmp.min <- apply(cam.op, MARGIN = 1, function(X){min(which(!is.na(X)))})    # 1st day of each station
   cam.tmp.max <- apply(cam.op, MARGIN = 1, function(X){max(which(!is.na(X)))})    # last day of each station
@@ -972,8 +976,8 @@ assessTemporalIndependence <- function(intable,
                                        stationCol,
                                        minDeltaTime,
                                        countsName) {
-
-
+  # Resolve no visible global variable
+  rn <- independent <- IndepRecStartTime  <- delta.time.mins <- delta.time.hours <- delta.time.days <- NULL
   # Resolve no visible global function
   DateTimeOriginal <- J <- delta.time.secs <- NULL
   ############################ Helper function #################################
