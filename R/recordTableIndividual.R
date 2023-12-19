@@ -52,19 +52,22 @@ recordTableIndividual <- function(inDir,
   }
 
 
-  if(class(individualIDfrom) != "character"){stop("IDfrom must be of class 'character'")}
+  #fix class check
+  if(!is.character(individualIDfrom)){stop("IDfrom must be of class 'character'")}
   if(individualIDfrom %in% c("metadata", "directory") == FALSE) stop("'IDfrom' must be 'metadata' or 'directory'")
 
  if(individualIDfrom == "metadata"){
     if(metadataHierarchyDelimitor %in% c("|", ":") == FALSE) stop("'metadataHierarchyDelimitor' must be '|' or ':'")
 
     if(!hasArg(metadataIDTag)) {stop("'metadataIDTag' must be defined if IDfrom = 'metadata'")}
-    if(class(metadataIDTag)  != "character") {stop("metadataIDTag must be of class 'character'")}
+    #fix class check
+    if(!is.character(metadataIDTag)) {stop("metadataIDTag must be of class 'character'")}
     if(length(metadataIDTag) != 1) {stop("metadataIDTag must be of length 1")}
   }
 
   if(hasArg(metadataIDTag)){
-    if(class(metadataIDTag) != "character"){stop("metadataIDTag must be of class 'character'", call. = FALSE)}
+    #fix class check
+    if(!is.character(metadataIDTag)){stop("metadataIDTag must be of class 'character'", call. = FALSE)}
     if(length(metadataIDTag) != 1){stop("metadataIDTag must be of length 1", call. = FALSE)}
   }
 
