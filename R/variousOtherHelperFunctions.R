@@ -368,7 +368,8 @@ addNewColumnsToGlobalTable <- function(intable,
 
 checkCamOpColumnNames <- function(cameraOperationMatrix){
 camopTest <- try(as.Date(colnames(cameraOperationMatrix)), silent = TRUE)
-if(class(camopTest) == "try-error") stop(paste('could not interpret column names in camOp as Dates. Desired format is YYYY-MM-DD, e.g. "2016-12-31". First column name in your camera operation matrix is "', colnames(cameraOperationMatrix)[1], '"', sep = '' ), call. = FALSE)
+#fix class check
+if(inherits(camopTest, "try-error")) stop(paste('could not interpret column names in camOp as Dates. Desired format is YYYY-MM-DD, e.g. "2016-12-31". First column name in your camera operation matrix is "', colnames(cameraOperationMatrix)[1], '"', sep = '' ), call. = FALSE)
 }
 
 # create date range table
