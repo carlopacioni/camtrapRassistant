@@ -81,7 +81,8 @@ recordTableFUN <- function( inDir,
     if(!is.character(cameraIDfrom)){stop("cameraIDfrom must be of class 'character'", call. = FALSE)}
     if(cameraIDfrom %in% c("filename", "directory") == FALSE) {stop("cameraIDfrom can only be 'filename', 'directory', or missing", call. = FALSE)}
     if(!hasArg(camerasIndependent)){stop("camerasIndependent is not defined. It must be defined if cameraIDfrom is defined", call. = FALSE)}
-    if(class(camerasIndependent) != "logical"){stop("camerasIndependent must be of class 'logical'", call. = FALSE)}
+    #fix class check
+    if(!is.logical(camerasIndependent)){stop("camerasIndependent must be of class 'logical'", call. = FALSE)}
   } else { camerasIndependent <- FALSE}
 
   cameraCol <- "Camera"
