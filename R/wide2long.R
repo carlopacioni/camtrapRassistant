@@ -64,7 +64,9 @@
 #' OROD <- oneRowOneDetection(W2L, countsName = "Count")
 #' OROD
 #'
+
 wide2long <- function(intable, pattern, variableName="variable", valueNames, rm.allNA=TRUE) {
+  patterns <- NULL
   nms <- names(intable)
   pat <- paste(pattern, collapse = "|")
   message(paste("The pattern provided matched these columns:\n",
