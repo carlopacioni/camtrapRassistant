@@ -162,7 +162,8 @@ recordTableFUN <- function( inDir,
     # execute exiftool
     metadata.tmp <- runExiftool(command.tmp = command.tmp[i], colnames.tmp = colnames.tmp)
 
-    if(class(metadata.tmp) == "NULL"){            # omit station if no images found
+    #class check
+    if(is.null(metadata.tmp)){            # omit station if no images found
 
       length.tmp <- length(list.files(dirs[i], pattern = ".jpg$|JPG$", ignore.case = TRUE, recursive = TRUE))
       warning(paste(dirs_short[i], "contains no images;", " found", length.tmp, "JPEGs"), call. = FALSE,  immediate. = TRUE)
