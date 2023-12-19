@@ -34,7 +34,7 @@ recordTable.par <- function(inDir,
 
   checkForSpacesInColumnNames(stationCol = stationCol)
 
-  if(class(IDfrom) != "character"){stop("IDfrom must be of class 'character'")}
+  if(!is.character(IDfrom)){stop("IDfrom must be of class 'character'")}
   if(IDfrom %in% c("metadata", "directory") == FALSE) stop("'IDfrom' must be 'metadata' or 'directory'")
 
  if(IDfrom == "metadata"){
