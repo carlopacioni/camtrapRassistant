@@ -200,7 +200,8 @@ recordTable.par <- function(inDir,
       )
 
       # if no tagged images in current station, go to next one
-      if(class(metadata.tmp) != "data.frame")       next
+      #fix class check
+      if(!is.data.frame(metadata.tmp))       next
 
       # remove empty metadata columns (if HierarchicalSubject is all empty or if additionalMetadataTags were not found)
       empty_cols <- which(apply(metadata.tmp, MARGIN = 2, FUN = function(X){all(X == "-")}))
