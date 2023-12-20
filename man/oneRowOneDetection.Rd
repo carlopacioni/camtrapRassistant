@@ -24,7 +24,7 @@ library(data.table)
 recTest <- data.table(fileName=LETTERS[1:5],
 Group1Count=c(rep(2,4), 1), # The count of individuals in the first group (G1)
 Group1Species= c(rep("sambar", 4), "Fallow"), # The species of G1
-Group1Sex=sample(c("Male", "Female", NA), 5, replace = T) # The sex of G1
+Group1Sex=sample(c("Male", "Female", NA), 5, replace =  TRUE) # The sex of G1
 )
 recTest
 
