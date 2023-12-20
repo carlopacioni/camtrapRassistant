@@ -12,6 +12,7 @@
 #' @examples
 #' # create a test recordTable
 #' # Make up a test recTable
+#' library(data.table)
 #' recTest <- data.table(fileName=LETTERS[1:5],
 #' Group1Count=c(rep(2,4), 1), # The count of individuals in the first group (G1)
 #' Group1Species= c(rep("sambar", 4), "Fallow"), # The species of G1
