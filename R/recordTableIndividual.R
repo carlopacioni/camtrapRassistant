@@ -1,5 +1,5 @@
 #' @export
-recordTableIndividual <- function(inDir,
+recordTableIndividualAssist <- function(inDir,
                                   cameraID,
                                   hasStationFolders,
                                   IDfrom,
