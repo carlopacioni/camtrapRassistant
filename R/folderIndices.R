@@ -14,7 +14,7 @@
 #' If there are multiple paths within \code{inDir} - as it is likely - the
 #' function will look for  the (first) longest and use that as an example.
 #'
-#' @inheritParams recordTable
+#' @inheritParams recordTableAssist
 #' @export
 folderIndices <- function(inDir) {
   dirs <- list.dirs(inDir, full.names = TRUE,  recursive = TRUE)

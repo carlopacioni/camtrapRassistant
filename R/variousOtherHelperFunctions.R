@@ -208,6 +208,7 @@ separateMultipleSpecies <- function(intable,
 # add station and camera id to metadata table
 #' Add station camera ID
 #'
+#' @inheritParams recordTableAssist
 #' @importFrom methods hasArg
 
 addStationCameraID <- function(intable,
@@ -705,7 +706,7 @@ parseDir <- function(intable, directoryInfoPositions) {
 #'@param columnOfInterest Character. Either the name of the species or individual
 #'column ID. The latter to obtain a recordTableIndividual
 #'@param cameraCol Character. The name of the camera column (e.g. "Camera")
-#'@inheritParams recordTable
+#'@inheritParams recordTableAssist
 #'@import data.table
 #'@import utils
 #'@export
