@@ -205,11 +205,10 @@ separateMultipleSpecies <- function(intable,
   }
   return(intable)
 }
-
-
-
-
 # add station and camera id to metadata table
+#' Add station camera ID
+#'
+#' @importFrom methods hasArg
 
 addStationCameraID <- function(intable,
                                dirs_short,
@@ -304,6 +303,10 @@ checkDateTimeOriginal <- function (intable, dirs_short, i){
   # Note to self: this may also be done outside the station loop, after the final record table is assembled. Saves a few executions of this function.
 
   removeDuplicatesOfRecords <- function(metadata.tmp, removeDuplicateRecords, camerasIndependent, stationCol, speciesCol, cameraCol){
+
+    #Resolve no visible global variable
+    countsName <- NULL
+
           if(isTRUE(removeDuplicateRecords)){
             if(isTRUE(camerasIndependent)){
               remove.tmp <- which(
@@ -365,10 +368,14 @@ addNewColumnsToGlobalTable <- function(intable,
 
 checkCamOpColumnNames <- function(cameraOperationMatrix){
 camopTest <- try(as.Date(colnames(cameraOperationMatrix)), silent = TRUE)
-if(class(camopTest) == "try-error") stop(paste('could not interpret column names in camOp as Dates. Desired format is YYYY-MM-DD, e.g. "2016-12-31". First column name in your camera operation matrix is "', colnames(cameraOperationMatrix)[1], '"', sep = '' ), call. = FALSE)
+#fix class check
+if(inherits(camopTest, "try-error")) stop(paste('could not interpret column names in camOp as Dates. Desired format is YYYY-MM-DD, e.g. "2016-12-31". First column name in your camera operation matrix is "', colnames(cameraOperationMatrix)[1], '"', sep = '' ), call. = FALSE)
 }
 
-
+# create date range table
+#' create date range table
+#'
+#' @importFrom stats aggregate
 createDateRangeTable <- function(cam.op,
                                  subset_species_tmp,
                                  buffer_tmp,
@@ -378,6 +385,7 @@ createDateRangeTable <- function(cam.op,
                                  maxNumberDays_tmp,
                                  timeZone_tmp)
                                  {
+
 
   cam.tmp.min <- apply(cam.op, MARGIN = 1, function(X){min(which(!is.na(X)))})    # 1st day of each station
   cam.tmp.max <- apply(cam.op, MARGIN = 1, function(X){max(which(!is.na(X)))})    # last day of each station
@@ -673,270 +681,6 @@ calculateTrappingEffort <- function(cam.op,
 
 
 ##########################################################################################################
-# for function surveyReport
-
-makeSurveyZip <- function(output,
-                          recordTable,
-                          CTtable ,
-                          speciesCol,
-                          stationCol,
-                          setupCol,
-                          retrievalCol,
-                          CTDateFormat,
-                          CTHasProblems,
-                          Xcol,
-                          Ycol,
-                          recordDateTimeCol,
-                          recordDateTimeFormat,
-                          sinkpath){
-
-  wd0 <- getwd()
-  on.exit(setwd(wd0))
-
-  dir.tmp <- tempdir()
-
-  file.sep <- .Platform$file.sep
-
-
-  dir.zip <- file.path(dir.tmp, paste("surveyReport_", Sys.Date(), sep = ""))
-  dir.zip.short <- paste("surveyReport_", Sys.Date(), sep = "")
-  unlink(dir.zip, recursive = TRUE)
-  dir.create(dir.zip, showWarnings = FALSE, recursive = TRUE)
-
-
-  # create directories
-  invisible(sapply(file.path(dir.zip, c("surveyReport", "activity", "scripts", "detectionMaps")), dir.create, showWarnings = FALSE))
-
-
-  ######
-  # save input tables
-
-  write.csv(recordTable, file = file.path(dir.zip, "recordTable.csv"), row.names = FALSE)
-  write.csv(CTtable, file = file.path(dir.zip, "CTtable.csv"), row.names = FALSE)
-
-
-  ######
-  # save surveyReport tables
-
-  dir.tmp2 <- file.path(dir.zip, "surveyReport")
-
-  for(xyz in 1:length(output)){
-    write.csv(output[[xyz]],
-              file = file.path(dir.tmp2, paste(names(output)[[xyz]], ".csv", sep = "")),
-              row.names = FALSE)
-  }
-  rm(xyz)
-
-
-
-  ######
-  # make activity plots
-
-
-  activityDensity(recordTable          = recordTable,
-                  allSpecies           = TRUE,
-                  speciesCol           = speciesCol,
-                  recordDateTimeCol    = recordDateTimeCol,
-                  recordDateTimeFormat = recordDateTimeFormat,
-                  plotR                = FALSE,
-                  writePNG             = TRUE,
-                  plotDirectory        = file.path(dir.zip, "activity"))
-
-
-
-  ######
-  # make detection maps
-
-  if(hasArg(Xcol) & hasArg(Ycol)){
-    detectionMaps(CTtable       = CTtable,
-                  recordTable   = recordTable,
-                  Xcol          = Xcol,
-                  Ycol          = Ycol,
-                  stationCol    = stationCol,
-                  speciesCol    = speciesCol,
-                  richnessPlot  = TRUE,
-                  speciesPlots  = TRUE,
-                  printLabels   = TRUE,
-                  plotR         = FALSE,
-                  writePNG      = TRUE,
-                  plotDirectory = file.path(dir.zip, "detectionMaps"),
-                  pngMaxPix     = 1000
-    )
-  }
-
-  ########################################################################################
-  # prepare scripts
-
-  scriptfile <- file.path(dir.zip, "scripts", "camtrapR_scripts.R")
-  file.create(scriptfile, showWarnings = FALSE)
-
-  # load basic data
-
-  sink(file = scriptfile)
-  cat("###  load data tables  ### \n\n")
-
-  cat("directory.data <- PLEASE_SPECIFY        # this is the directory you got after unzipped the zip file to (e.g. .../surveyReport_2016-02-29/)  \n\n")
-
-
-  cat("CTtable     <- read.csv(paste(directory.data, 'CTtable.csv', sep = '/'))\n")
-  cat("recordTable <- read.csv(paste(directory.data, 'recordTable.csv', sep = '/'))\n\n\n")
-
-  sink()
-
-
-  # make detection maps   # no, because of coordinate columns
-
-  sink(file = scriptfile, append = TRUE)
-  cat("###  plot species detections  ### \n\n")
-  if(hasArg(Xcol) & hasArg(Ycol)){
-    cat(paste("Xcol <- '", Xcol, "'\n", sep = ""))
-    cat(paste("Ycol <- '", Ycol, "'\n\n", sep = ""))
-  } else {
-    cat("Xcol <- PLEASE_SPECIFY\n")
-    cat("Ycol <- PLEASE_SPECIFY\n\n")
-  }
-
-  cat(paste("detections <- detectionMaps(CTtable = CTtable,
-            recordTable  = recordTable,
-            Xcol         = Xcol,
-            Ycol         = Ycol,
-            stationCol   = '", stationCol, "',
-            speciesCol   = '", speciesCol, "',
-            writePNG     = FALSE,
-            plotR        = TRUE,
-            printLabels  = TRUE,
-            richnessPlot = TRUE,
-            addLegend    = TRUE
-  ) \n\n\n", sep = ""))
-
-  sink()
-
-
-  # camera operation matrix
-
-  sink(file = scriptfile, append = TRUE)
-  cat("###  camera operation matrix  ### \n\n")
-
-  cat(paste("camOp <- cameraOperation(CTtable = CTtable,
-            stationCol                                  = '", stationCol, "',
-            #cameraCol,
-            setupCol                                    = '", setupCol, "',
-            retrievalCol                                = '", retrievalCol, "',
-            hasProblems                                 = '", CTHasProblems, "',
-            #byCamera,
-            #allCamsOn,
-            #camerasIndependent,
-            dateFormat                                  = '", CTDateFormat, "' #,
-            #writecsv                                   = FALSE,
-            #outDir
-  ) \n\n\n", sep = ""))
-
-  sink()
-
-
-  # make detection histories
-
-  sink(file = scriptfile, append = TRUE)
-  cat("###  detection histories  ### \n\n")
-
-  cat("day1              <- PLEASE_SPECIFY \n")
-  cat("occasionLength    <- PLEASE_SPECIFY\n")
-  cat("speciesOfInterest <- PLEASE_SPECIFY\n")
-  cat("timeZone          <- PLEASE_SPECIFY \n\n")
-
-  cat(paste("detHist <- detectionHistory(recordTable = recordTable,
-            species                                  = speciesOfInterest,
-            camOp                                    = cameraOperation,
-            stationCol                               = '", stationCol, "',
-            speciesCol                               = '", speciesCol, "',
-            recordDateTimeCol                        = '", recordDateTimeCol, "',
-            recordDateTimeFormat                     = '", recordDateTimeFormat, "',
-            occasionLength                           = occasionLength,
-            #maxNumberDays,
-            day1                                     = day1,
-            #buffer                                  = 0,
-            includeEffort                            = TRUE,
-            scaleEffort                              = FALSE,
-            occasionStartTime                        = 0,
-            datesAsOccasionNames                     = FALSE,
-            timeZone                                 = timeZone,
-            writecsv                                 = FALSE #,
-            # outDir
-  ) \n\n\n", sep = ""))
-
-  sink()
-
-
-  ### write description text file ###
-
-  readmefile <- file.path(dir.zip, "readme.txt")
-  file.create(readmefile, showWarnings = FALSE)
-
-  sink(file = readmefile)
-
-
-  cat(paste("this zip file contains a summary of a camera trapping survey:\n\n"))
-  cat(paste("total survey period:              ", min(output$survey_dates$setup_date), "-", max(output$survey_dates$retrieval_date), "\n"))
-  cat(paste("Total number of stations:         ", nrow(output$survey_dates), "\n"))
-  cat(paste("Number of operational stations:   ", length(which(output$survey_dates$n_nights_active >= 1)), "\n"))
-  cat(paste("Total number of cameras:          ", sum(output$survey_dates$n_cameras), "\n"))
-  cat(paste("Total number of active trap days: ", sum(output$survey_dates$n_nights_active), "\n\n"))
-
-  cat("\n-------------------------------------------------------\n\n")
-
-  cat(paste("the following table shows a summary of survey period for each station \n\n"))
-  print(output$survey_dates, row.names = FALSE)
-  cat("\n-------------------------------------------------------\n\n")
-
-  cat("legend to the data structure in the zip file:\n\n")
-  cat(".../activity/              plots of activity density estimations for each species created with activityDensity\n")
-  if(hasArg(Xcol) & hasArg(Ycol)){cat(".../detectionMaps/         maps of observed species richness and numbers of species records\n")}
-  cat(".../scripts/               a prepared R script for occupancy analyses\n")
-  cat(".../surveyReport/          the tables created by surveyReport summarising the survey\n")
-  cat(".../CTtable.csv            table of camera trap station IDs, operation times and coordinates\n")
-  cat(".../recordTable.csv        table of species records\n")
-  cat(".../readme.txt             this file\n\n")
-
-  cat("\n-------------------------------------------------------\n\n")
-
-  cat(paste("species images are located in:\n\n"))
-  cat(paste(as.character(recordTable$Directory)[1], "          # the first record\n"))
-  cat(paste(as.character(recordTable$Directory)[nrow(recordTable)], "          # the last record\n"))
-
-  cat("\n-------------------------------------------------------\n\n")
-
-  cat("information about who created this report:\n\n")
-  print(as.data.frame(Sys.info()))
-
-  cat(paste("\n\n\n\n ***   report created by function surveyReport on",  Sys.time(),  "   ***\n\n\n"))
-
-
-  sink()
-
-  ######
-  # make final zip file
-
-  # list files
-  files2zip <- dir(path = dir.zip, full.names = FALSE, recursive = TRUE)
-  files2zip <- file.path(dir.zip.short, files2zip)
-
-  # write zip
-  setwd(dir.tmp)
-  cat("compiling zip file \n",
-      paste(sinkpath, paste(dir.zip.short, ".zip\n\n", sep = ""), sep = file.sep))
-
-  suppressMessages(zip(zipfile = file.path(sinkpath,
-                                           paste(dir.zip.short, ".zip", sep = "")),
-                       files   = files2zip,
-                       flags   = ""))
-
-
-
-  # remove temporary directory
-  #unlink(dir.zip, recursive = TRUE)
-
-}
-
 splitDir = function(x, directoryInfoPosition) {
   tmp <- unlist(strsplit(x, split = "/", fixed = TRUE))
   return(tmp[directoryInfoPosition])
@@ -963,6 +707,7 @@ parseDir <- function(intable, directoryInfoPositions) {
 #'@param cameraCol Character. The name of the camera column (e.g. "Camera")
 #'@inheritParams recordTable
 #'@import data.table
+#'@import utils
 #'@export
 assessTemporalIndependence <- function(intable,
                                        deltaTimeComparedTo,
@@ -972,8 +717,8 @@ assessTemporalIndependence <- function(intable,
                                        stationCol,
                                        minDeltaTime,
                                        countsName) {
-
-
+  # Resolve no visible global variable
+  rn <- independent <- IndepRecStartTime  <- delta.time.mins <- delta.time.hours <- delta.time.days <- NULL
   # Resolve no visible global function
   DateTimeOriginal <- J <- delta.time.secs <- NULL
   ############################ Helper function #################################

@@ -25,6 +25,8 @@ recordTableFUN <- function( inDir,
                             countsName
 )
 {
+  #Resolve no visible global variable
+  Date <- DateTimeOriginal <- Time <- delta.time.secs <- delta.time.mins <- delta.time.hours <- delta.time.days <- NULL
   #################### To DO ##########################################
   # add checks for new arguments
 
@@ -43,14 +45,16 @@ recordTableFUN <- function( inDir,
   if(StationIDfrom %in% c("filename", "directory") == FALSE) {stop("StationIDfrom can only be 'filename', 'directory'", call. = FALSE)}
   if(StationIDfrom == "directory") hasStationFolders <- TRUE else hasStationFolders <- FALSE
 
-  if(class(speciesIDfrom) != "character"){stop("speciesIDfrom must be of class 'character'")}
+  #fix character class check
+  if(!is.character(speciesIDfrom)){stop("speciesIDfrom must be of class 'character'")}
   if(speciesIDfrom %in% c("metadata", "directory") == FALSE) stop("'speciesIDfrom' must be 'metadata' or 'directory'")
 
  if(speciesIDfrom == "metadata"){
     if(metadataHierarchyDelimitor %in% c("|", ":") == FALSE) stop("'metadataHierarchyDelimitor' must be '|' or ':'")
 
     if(!hasArg(metadataSpeciesTag)) {stop("'metadataSpeciesTag' must be defined if speciesIDfrom = 'metadata'")}
-    if(class(metadataSpeciesTag) != "character"){stop("metadataSpeciesTag must be of class 'character'")}
+    #fix character class check
+    if(!is.character(metadataSpeciesTag)){stop("metadataSpeciesTag must be of class 'character'")}
     if(length(metadataSpeciesTag) != 1){stop("metadataSpeciesTag must be of length 1")}
   }
 
@@ -67,27 +71,32 @@ recordTableFUN <- function( inDir,
   if(Sys.which("exiftool") == "") stop("cannot find ExifTool", call. = FALSE)
 
   if(hasArg(metadataSpeciesTag)){
-    if(class(metadataSpeciesTag) != "character"){stop("metadataSpeciesTag must be of class 'character'", call. = FALSE)}
+    #fix character class check
+    if(!is.character(metadataSpeciesTag)){stop("metadataSpeciesTag must be of class 'character'", call. = FALSE)}
     if(length(metadataSpeciesTag) != 1){stop("metadataSpeciesTag must be of length 1", call. = FALSE)}
   }
 
   if(hasArg(cameraIDfrom)){
-    if(class(cameraIDfrom) != "character"){stop("cameraIDfrom must be of class 'character'", call. = FALSE)}
+    #fix character class check
+    if(!is.character(cameraIDfrom)){stop("cameraIDfrom must be of class 'character'", call. = FALSE)}
     if(cameraIDfrom %in% c("filename", "directory") == FALSE) {stop("cameraIDfrom can only be 'filename', 'directory', or missing", call. = FALSE)}
     if(!hasArg(camerasIndependent)){stop("camerasIndependent is not defined. It must be defined if cameraIDfrom is defined", call. = FALSE)}
-    if(class(camerasIndependent) != "logical"){stop("camerasIndependent must be of class 'logical'", call. = FALSE)}
+    #fix class check
+    if(!is.logical(camerasIndependent)){stop("camerasIndependent must be of class 'logical'", call. = FALSE)}
   } else { camerasIndependent <- FALSE}
 
   cameraCol <- "Camera"
 
 
   if(hasArg(outDir)){
-    if(class(outDir) != "character"){stop("outDir must be of class 'character'", call. = FALSE)}
+    #fix character class check
+    if(!is.character(outDir)){stop("outDir must be of class 'character'", call. = FALSE)}
     if(dir.exists(outDir) == FALSE) stop("outDir does not exist", call. = FALSE)
   }
 
   if(hasArg(exclude)){
-    if(class(exclude) != "character"){stop("exclude must be of class 'character'", call. = FALSE)}
+    #fix character class check
+    if(!is.character(exclude)){stop("exclude must be of class 'character'", call. = FALSE)}
   }
 
   stopifnot(is.logical(removeDuplicateRecords))
@@ -95,7 +104,8 @@ recordTableFUN <- function( inDir,
   metadata.tagname <- "HierarchicalSubject"    # for extracting metadata assigned in tagging software
 
   if(hasArg(additionalMetadataTags)){
-    if(class(additionalMetadataTags) != "character"){stop("additionalMetadataTags must be of class 'character'", call. = FALSE)}
+    #fix character class check
+    if(!is.character(additionalMetadataTags)){stop("additionalMetadataTags must be of class 'character'", call. = FALSE)}
     if(any(grep(pattern = " ", x = additionalMetadataTags, fixed = TRUE))) stop("In argument additionalMetadataTags, spaces are not allowed")
     if("HierarchicalSubject" %in% additionalMetadataTags & speciesIDfrom == "metadata")  {
       warning("'HierarchicalSubject' may not be in 'additionalMetadataTags' if speciesIDfrom = 'metadata'. It will be ignored because the function returns it anyway.", call. = FALSE)
@@ -122,7 +132,8 @@ recordTableFUN <- function( inDir,
   stopifnot(class(writecsv) == "logical")
 
 #  if(!hasArg(inDir)){stop("inDir must be defined", call. = FALSE)}
-  if(class(inDir) != "character"){stop("inDir must be of class 'character'", call. = FALSE)}
+  #fix character class check
+  if(!is.character(inDir)){stop("inDir must be of class 'character'", call. = FALSE)}
   if(length(inDir) != 1){stop("inDir may only consist of 1 element only", call. = FALSE)}
   if(!dir.exists(inDir)) stop("Could not find inDir:\n", inDir, call. = FALSE)
 
@@ -151,7 +162,8 @@ recordTableFUN <- function( inDir,
     # execute exiftool
     metadata.tmp <- runExiftool(command.tmp = command.tmp[i], colnames.tmp = colnames.tmp)
 
-    if(class(metadata.tmp) == "NULL"){            # omit station if no images found
+    #class check
+    if(is.null(metadata.tmp)){            # omit station if no images found
 
       length.tmp <- length(list.files(dirs[i], pattern = ".jpg$|JPG$", ignore.case = TRUE, recursive = TRUE))
       warning(paste(dirs_short[i], "contains no images;", " found", length.tmp, "JPEGs"), call. = FALSE,  immediate. = TRUE)
@@ -196,7 +208,8 @@ recordTableFUN <- function( inDir,
       }
 
       # if no tagged images in current station, go to next one
-      if(class(metadata.tmp) != "data.frame")       next
+      #fix class check
+      if(!is.data.frame(metadata.tmp))       next
 
       # remove empty metadata columns (if HierarchicalSubject is all empty or if additionalMetadataTags were not found)
       empty_cols <- which(apply(metadata.tmp, MARGIN = 2, FUN = function(X){all(X == "-")}))

@@ -13,6 +13,9 @@ wide2long(
 )
 }
 \arguments{
+\item{intable}{data.frame or data.table. A data frame or a data.table with the
+detections (e.g. the output from recordTable)}
+
 \item{pattern}{Character. The pattern to identify the columns names that need
 to be collated (e.g. c("Species$", "Age$"))}
 

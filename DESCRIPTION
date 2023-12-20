@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: c(
     person("Carlo", "Pacioni", email="carlo.pacioni@gmail.com", role=c("aut", "cre")),
     person("Luke", "Emerson", role = "ctb"),
-    person("Sachini", "Kaushakya", role = "ctb")
+    person("Sachini", "Maduwanthi", role = "ctb")
     )
 Description: The main additional functionalities offered by camtrapRassistant are
     the abilities of using more complex folder structure to extract metadata on 
@@ -20,6 +20,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
     data.table,
+    methods,
+    utils,
+    stats,
     parallel
 URL: https://github.com/carlopacioni/camtrapRassistant
 BugReports: https://github.com/carlopacioni/camtrapRassistant/issues

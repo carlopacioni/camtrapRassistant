@@ -20,7 +20,7 @@
 #'this order, and before "Ind2Species" and "Ind2Sex". \code{data.table::setcolorder}
 #'can be used to set the order of the columns if needs be (see [data.table::setcolorder]).
 #'
-#'@inheritParams assassessTemporalIndependence
+#'@inheritParams assessTemporalIndependence
 #'@param pattern Character. The pattern to identify the columns names that need
 #'  to be collated (e.g. c("Species$", "Age$"))
 #'@param valuesNames Character. The vector of names to apply to the combined
@@ -64,7 +64,9 @@
 #' OROD <- oneRowOneDetection(W2L, countsName = "Count")
 #' OROD
 #'
+
 wide2long <- function(intable, pattern, variableName="variable", valueNames, rm.allNA=TRUE) {
+  patterns <- NULL
   nms <- names(intable)
   pat <- paste(pattern, collapse = "|")
   message(paste("The pattern provided matched these columns:\n",
