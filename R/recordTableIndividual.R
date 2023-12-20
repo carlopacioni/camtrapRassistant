@@ -58,19 +58,6 @@
 #' \code{eventSummaryColumn} and \code{eventSummaryFunction} must be of same
 #' length.
 #'
-#' Argument \code{video} is analogous to \code{\link{recordTable}}, a named
-#' list with 2 or 4 items. 2 items (\code{file_formats}, \code{dateTimeTag})
-#' are always required, and are sufficent if \code{IDfrom = "directory"}. In
-#' that case, no digiKam tags will be returned.  To return digiKam tags, two
-#' additional items are required (\code{db_directory}, \code{db_filename}).
-#' This is essential when using \code{IDfrom = "metadata"}. When using
-#' \code{IDfrom = "directory"}, it is optional, but allows to extract metadata
-#' tags assigned to videos in digiKam. This workaround is necessary because
-#' digiKam tags are not written into video metadata, but are only saved in the
-#' digiKam database. So in contrast to JPG images, they can not be extracted
-#' with ExifTool. It also requires that \code{inDir} is in your digiKam
-#' database.
-#'
 #' @inheritParams recordTableAssist
 #' @export
 recordTableIndividualAssist <- function(inDir,
