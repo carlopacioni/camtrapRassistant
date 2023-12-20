@@ -303,7 +303,7 @@
 #'
 #'  \dontrun{   # this is because otherwise the test would run too long to pass CRAN tests
 #'
-#'    rec.db3a <- recordTable(inDir                  = wd_images_ID,
+#'    rec.db3a <- recordTableAssist(inDir                  = wd_images_ID,
 #'                            speciesIDfrom          = "directory",
 #'                            minDeltaTime           = 0,
 #'                            exclude                = "NO_ID",
@@ -311,7 +311,7 @@
 #'                            removeDuplicateRecords = FALSE
 #'    )
 #'
-#'    rec.db3b <- recordTable(inDir                  = wd_images_ID,
+#'    rec.db3b <- recordTableAssist(inDir                  = wd_images_ID,
 #'                            speciesIDfrom          = "directory",
 #'                            minDeltaTime           = 0,
 #'                            exclude                = "NO_ID",
@@ -342,7 +342,7 @@
 #'
 #'
 #'@export
-recordTable <- function(inDir,
+recordTableAssist <- function(inDir,
                         IDfrom,
                         cameraID,
                         StationIDfrom="directory",
