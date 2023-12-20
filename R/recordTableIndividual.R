@@ -71,7 +71,7 @@
 #' with ExifTool. It also requires that \code{inDir} is in your digiKam
 #' database.
 #'
-#' @inheritParams recordTable
+#' @inheritParams recordTableAssist
 #' @export
 recordTableIndividualAssist <- function(inDir,
                                   cameraID,
