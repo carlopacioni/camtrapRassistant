@@ -93,7 +93,7 @@ tag name. Only one species name can be provided (e.g. "dog").}
 
 \item{additionalMetadataTags}{character. Additional camera model-specific
 metadata tags to be extracted. If possible, specify tag groups as returned
-by \code{\link{exifTagNames}}, (e.g.
+by \code{\link[camtrapR]{exifTagNames}}, (e.g.
 c("MakerNotes:AmbientTemperature","MakerNotes:MoonPhase").}
 
 \item{removeDuplicateRecords}{logical. If \code{TRUE}, only one record will be
@@ -275,10 +275,10 @@ this function (namely on the arguments: \code{exclude} for excluding
 species, and \code{minDeltaTime} and \code{deltaTimeComparedTo} for temporal
 independence).
 
-\tabular{l}{ \code{\link{detectionMaps}} \cr \code{\link{detectionHistory}}
-\cr \code{\link{activityHistogram}} \cr \code{\link{activityDensity}} \cr
-\code{\link{activityRadial}} \cr \code{\link{activityOverlap}} \cr
-\code{\link{activityHistogram}} \cr \code{\link{surveyReport}} \cr }
+\tabular{l}{ \code{\link[camtrapR]{detectionMaps}} \cr \code{\link{detectionHistory}}
+\cr \code{\link[camtrapR]{activityHistogram}} \cr \code{\link[camtrapR]{activityDensity}} \cr
+\code{\link[camtrapR]{activityRadial}} \cr \code{\link[camtrapR]{activityOverlap}} \cr
+\code{\link[camtrapR]{activityHistogram}} \cr \code{\link[camtrapR]{surveyReport}} \cr }
 
 Custom image metadata must be organised hierarchically (i.e. Tag group -
 Tag; e.g. "Species" - "Leopard Cat"). Detailed information on how to set up

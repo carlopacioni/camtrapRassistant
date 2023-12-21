@@ -104,7 +104,7 @@ tag name.}
 
 \item{additionalMetadataTags}{character. Additional camera model-specific
 metadata tags to be extracted. If possible, specify tag groups as returned
-by \code{\link{exifTagNames}}, (e.g.
+by \code{\link[camtrapR]{exifTagNames}}, (e.g.
 c("MakerNotes:AmbientTemperature","MakerNotes:MoonPhase").}
 
 \item{removeDuplicateRecords}{logical. If \code{TRUE}, only one record will be
