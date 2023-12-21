@@ -19,11 +19,14 @@ detections (e.g. the output from recordTable)}
 \item{pattern}{Character. The pattern to identify the columns names that need
 to be collated (e.g. c("Species$", "Age$"))}
 
+\item{variableName}{Character. Name for the measured variable names column.
+The default name is 'variable'.}
+
+\item{valueNames}{Character. The vector of names to apply to the combined
+variables}
+
 \item{rm.allNA}{whether rows where the values for the columns
 \code{valueNames} are all NA should be removed}
-
-\item{valuesNames}{Character. The vector of names to apply to the combined
-variables}
 }
 \value{
 A record table
@@ -35,7 +38,7 @@ multiple individuals in the same image (e.g. Ind1Species, Ind1Age,
 Ind2Species, Ind2Age, etc.), the user may want to collate all these in one
 column (e.g. Species and Age). This function facilitate this process and
 removes lines where all the information being collated is missing (e.g. when
-there are no additional individuals) if \code{rm.allNA=TRUE} \link{default}. See the
+there are no additional individuals) if \code{rm.allNA=TRUE}. See the
 first example for this situation.
 }
 \details{

@@ -6,6 +6,15 @@
 \usage{
 oneRowOneDetection(intable, countsName)
 }
+\arguments{
+\item{intable}{data.frame or data.table. A data frame or a data.table with the
+detections (e.g. the output from recordTable)}
+
+\item{countsName}{character. Vector of the metadata tag name (as per image
+management/tagging software) containing count/abundance information, or the
+vector of the name given to the count/abundance folder position within
+\code{directoryInfoNames} (e.g. "Counts").}
+}
 \value{
 record table (data.table)
 }

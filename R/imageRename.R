@@ -46,7 +46,7 @@
 #'
 #'\strong{NOTE}: This function assumes that camera folders, if present, are
 #'within the station folders.
-#'@inheritParams recordTable
+#'@inheritParams recordTableAssist
 #'@param hasCameraFolders Do the station directories in \code{inDir} have camera
 #'  subdirectories (e.g. "inDir/StationA/Camera1")?
 #'@param keepCameraSubfolders logical. Should camera directories be preserved as
