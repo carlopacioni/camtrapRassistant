@@ -18,10 +18,21 @@ addStationCameraID(
 )
 }
 \arguments{
+\item{intable}{data.frame or data.table. A data frame or a data.table with the
+detections (e.g. the output from recordTable)}
+
+\item{dirs_short}{Vector or directory names (without path)}
+
 \item{stationCol}{character. Name of the camera trap station column. Assumes
 "Station" if undefined.}
 
+\item{cameraCol}{Character. The name of the camera column (e.g. "Camera")}
+
 \item{cameraID}{This argument is deprecated. Use \code{cameraIDfrom}.}
+
+\item{hasStationFolders}{Logical. Whether station column is taken from directory}
+
+\item{i}{Position index taken from the for loop}
 
 \item{IDfrom}{This argument is deprecated. Use \code{speciesIDfrom}.}
 
@@ -44,5 +55,9 @@ the camera ID directory position = 7). Only need to use this argument when
 "SurveyPeriod/Region/Site/Transect/Station/Species/Counts/...").}
 }
 \description{
-Add station camera ID
+Internally used to compile record table.
+}
+\details{
+Do not need to update cameraID and IDfrom argument because these are provided
+internally with correct argument and the function is not exported
 }

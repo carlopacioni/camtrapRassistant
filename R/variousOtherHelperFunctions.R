@@ -206,9 +206,19 @@ separateMultipleSpecies <- function(intable,
   return(intable)
 }
 # add station and camera id to metadata table
+
 #' Add station camera ID
 #'
+#' Internally used to compile record table.
+#'
+#' Do not need to update cameraID and IDfrom argument because these are provided
+#' internally with correct argument and the function is not exported
+#'
+#' @param dirs_short Vector or directory names (without path)
+#' @param hasStationFolders Logical. Whether station column is taken from directory
+#' @param i Position index taken from the for loop
 #' @inheritParams recordTableAssist
+#' @inheritParams assessTemporalIndependence
 #' @importFrom methods hasArg
 
 addStationCameraID <- function(intable,
