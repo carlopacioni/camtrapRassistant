@@ -268,12 +268,12 @@
 #'  http://www.sno.phy.queensu.ca/~phil/exiftool/
 #'
 #'@examples {
-#'wd_images_ID <- system.file("pictures/sample_images", package = "camtrapRassistant")
+#'wd_images_ID <- system.file("pictures/sample_images_species_dir", package = "camtrapR")
 #'
 #'if (Sys.which("exiftool") != ""){        # only run these examples if ExifTool is available
 #'
 #'
-#'  rec.db1 <- recordTable(inDir                  = wd_images_ID,
+#'  rec.db1 <- recordTableAssist(inDir                  = wd_images_ID,
 #'                         speciesIDfrom          = "directory",
 #'                         minDeltaTime           = 60,
 #'                         deltaTimeComparedTo    = "lastRecord",
