@@ -45,6 +45,8 @@ file path but are not included when defining \code{inDir}.}
 
 \item{cameraID}{This argument is deprecated. Use \code{cameraIDfrom}.}
 
+\item{hasStationFolders}{Logical. Whether station column is taken from directory}
+
 \item{IDfrom}{This argument is deprecated. Use \code{speciesIDfrom}.}
 
 \item{StationIDfrom}{character. Read station ID from image "filename" or
@@ -61,6 +63,9 @@ species "directory" names.}
 
 \item{camerasIndependent}{logical. If \code{TRUE}, species records are
 considered independent between cameras at same station.}
+
+\item{individualIDfrom}{character. Read individual ID from image metadata
+("metadata") of from directory names ("directory")}
 
 \item{exclude}{character. Vector of species names to be excluded from the
 record table (e.g. c("Dog", "Cat", ...)).}
@@ -93,6 +98,9 @@ management software field called "HierarchicalSubject".}
 
 \item{metadataSpeciesTag}{character. In custom image metadata, the species ID
 tag name. Only one species name can be provided (e.g. "dog").}
+
+\item{metadataIDTag}{character. In custom image metadata, the individual ID
+tag name.}
 
 \item{additionalMetadataTags}{character. Additional camera model-specific
 metadata tags to be extracted. If possible, specify tag groups as returned

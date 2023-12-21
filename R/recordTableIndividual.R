@@ -43,7 +43,12 @@
 #' extract summary statistics for independent sampling events. See documentations
 #' for these functions in \code{camtrapR}.
 #'
+#' @param individualIDfrom character. Read individual ID from image metadata
+#' ("metadata") of from directory names ("directory")
+#' @param metadataIDTag character. In custom image metadata, the individual ID
+#' tag name.
 #' @inheritParams recordTableAssist
+#' @inheritParams addStationCameraID
 #' @export
 recordTableIndividualAssist <- function(inDir,
                                   cameraID,
