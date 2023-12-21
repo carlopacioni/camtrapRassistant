@@ -22,7 +22,6 @@ Imports:
     data.table,
     methods,
     utils,
-    stats,
     parallel
 URL: https://github.com/carlopacioni/camtrapRassistant
 BugReports: https://github.com/carlopacioni/camtrapRassistant/issues
