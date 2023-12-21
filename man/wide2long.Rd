@@ -19,11 +19,14 @@ detections (e.g. the output from recordTable)}
 \item{pattern}{Character. The pattern to identify the columns names that need
 to be collated (e.g. c("Species$", "Age$"))}
 
+\item{variableName}{Character. Name for the measured variable names column.
+The default name is 'variable'.}
+
+\item{valueNames}{Character. The vector of names to apply to the combined
+variables}
+
 \item{rm.allNA}{whether rows where the values for the columns
 \code{valueNames} are all NA should be removed}
-
-\item{valuesNames}{Character. The vector of names to apply to the combined
-variables}
 }
 \value{
 A record table
