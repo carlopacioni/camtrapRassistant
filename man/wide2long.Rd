@@ -38,7 +38,7 @@ multiple individuals in the same image (e.g. Ind1Species, Ind1Age,
 Ind2Species, Ind2Age, etc.), the user may want to collate all these in one
 column (e.g. Species and Age). This function facilitate this process and
 removes lines where all the information being collated is missing (e.g. when
-there are no additional individuals) if \code{rm.allNA=TRUE} \link{default}. See the
+there are no additional individuals) if \code{rm.allNA=TRUE}. See the
 first example for this situation.
 }
 \details{
