@@ -3,7 +3,7 @@
 \name{recordTableIndividualAssist}
 \alias{recordTableIndividualAssist}
 \title{Generate a single-species record table with individual identification from
-camera trap images or videos}
+camera trap images}
 \usage{
 recordTableIndividualAssist(
   inDir,
@@ -155,12 +155,10 @@ IDs, e.g. for (spatial) capture-recapture analyses. It prepares input for
 the function \code{\link{spatialDetectionHistory}}.
 }
 \details{
-The function can handle a number of different ways of storing images and
-videos. In every case, images need to be stored in a species directory first
+The function can handle a number of different ways of storing images.
+In every case, images need to be stored in a species directory first
 (e.g. using function \code{\link{getSpeciesImages}}). Station subdirectories
-are optional. Camera subdirectories are not supported. This directory
-structure can be created easily with function
-\code{\link{getSpeciesImages}}.
+are optional.
 
 As with species identification, individuals can be identified in 2 different
 ways: by moving images into individual directories
@@ -192,19 +190,6 @@ available tag names. The metadata tags thus extracted may be used as
 individual covariates in spatial capture-recapture models.
 
 \code{eventSummaryColumn} and \code{eventSummaryFunction} can be used to
-extract summary statistics for independent sampling events. For example, you
-assigned a "count" tag to your images, indicating the number of individuals
-in a picture. In a sequence of pictures taken within 1 minute, most pictures
-show one individual, but one image shows two individuals. You tagged the
-images accordingly (count = 1 or count = 2) and run \code{recordTable}. Set
-\code{eventSummaryColumn = "count"} and \code{eventSummaryFunction = "max"}
-to obtain the maximum number of \code{count} in all images within
-\code{minDeltaTime} minutes of a given record. The results is in a new
-column, in this example \code{count_max}. You can also calculate several
-statistics at the same time, by supplying vectors of values, e.g.
-\code{eventSummaryColumn = c("count", "count", "camera")} and
-\code{eventSummaryFunction = c("min", "max", "unique")} to get minimum and
-maximum count and all unique camera IDs for that event. Note that
-\code{eventSummaryColumn} and \code{eventSummaryFunction} must be of same
-length.
+extract summary statistics for independent sampling events. See documentations
+for these functions in \code{camtrapR}.
 }
