@@ -1,5 +1,4 @@
 recordTableFUN <- function( inDir,
-                            IDfrom,
                             StationIDfrom="directory",
                             speciesIDfrom,
                             cameraIDfrom,

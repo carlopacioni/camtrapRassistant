@@ -123,7 +123,6 @@ recordTableIndividualAssist <- function(inDir,
   }
 
 recTable <- recordTableFUN(inDir=inDir,
-                           IDfrom=IDfrom,
                            StationIDfrom=StationIDfrom,
                            speciesIDfrom=speciesIDfrom,
                            cameraIDfrom=cameraIDfrom,
