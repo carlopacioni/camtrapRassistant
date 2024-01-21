@@ -98,7 +98,7 @@ second, as can happen if cameras take sequences of images. It is a consecutive
 number given to all images taken at the same station by the same camera within
 one minute. The double underscore "__" in the image file names is for
 splitting and extracting information from file names in other functions (e.g.
-for retrieving camera IDs in \code{\link{recordTable}} if camera
+for retrieving camera IDs in \code{\link{recordTableAssist}} if camera
 subdirectories are not preserved (\code{keepCameraSubfolders = FALSE})).
 
 The function finds all JPEG images and extracts the image timestamp from the
