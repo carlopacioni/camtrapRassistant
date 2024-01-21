@@ -201,3 +201,44 @@ individual covariates in spatial capture-recapture models.
 extract summary statistics for independent sampling events. See documentations
 for these functions in \code{camtrapR}.
 }
+\examples{
+
+
+\dontrun{   # the examples run too long to pass CRAN tests
+
+ wd_images_ID_individual <- system.file("pictures/sample_images_indiv_tag/LeopardCat",
+                                        package = "camtrapR")
+ # missing space in species = "LeopardCat" is because of CRAN package policies
+ # note argument additionalMetadataTags: contains tag names as returned by function exifTagNames
+
+ if (Sys.which("exiftool") != ""){        # only run these examples if ExifTool is available
+
+ rec_table_pbe <- recordTableIndividualAssist(inDir                  = wd_images_ID_individual,
+                                        minDeltaTime           = 60,
+                                        deltaTimeComparedTo    = "lastRecord",
+                                        hasStationFolders      = FALSE,
+                                        IDfrom                 = "metadata",
+                                        camerasIndependent     = FALSE,
+                                        writecsv               = FALSE,
+                                        metadataIDTag          = "individual",
+                                        additionalMetadataTags = c("EXIF:Model", "EXIF:Make"),
+                                        timeZone               = "Asia/Kuala_Lumpur"
+ )
+
+
+
+} else {
+# show function output if ExifTool is not available
+message("ExifTool is not available. Cannot test function. Loading recordTableSample instead")
+data(recordTableSample)
+}
+}
+
+
+}
+\references{
+Phil Harvey's ExifTool \url{https://exiftool.org/}
+}
+\author{
+Juergen Niedballa
+}
