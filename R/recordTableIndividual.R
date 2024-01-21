@@ -81,13 +81,14 @@
 #'  rec_table_pbe <- recordTableIndividualAssist(inDir                  = wd_images_ID_individual,
 #'                                         minDeltaTime           = 60,
 #'                                         deltaTimeComparedTo    = "lastRecord",
-#'                                         hasStationFolders      = FALSE,
-#'                                         IDfrom                 = "metadata",
+#'                                         StationIDfrom          = "directory",
+#'                                         individualIDfrom       = "metadata",
 #'                                         camerasIndependent     = FALSE,
 #'                                         writecsv               = FALSE,
 #'                                         metadataIDTag          = "individual",
 #'                                         additionalMetadataTags = c("EXIF:Model", "EXIF:Make"),
 #'                                         timeZone               = "Asia/Kuala_Lumpur"
+#'                                         speciesIDfrom          = "directory"
 #'  )
 #'
 #'
