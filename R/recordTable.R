@@ -282,7 +282,7 @@
 #'  )
 #'  # note argument additionalMetadataTags: it contains tag names as returned by function exifTagNames
 #'
-#'  rec.db2 <- recordTable(inDir                  = wd_images_ID,
+#'  rec.db2 <- recordTableAssist(inDir                  = wd_images_ID,
 #'                         speciesIDfrom          = "directory",
 #'                         minDeltaTime           = 60,
 #'                         deltaTimeComparedTo    = "lastRecord",
