@@ -3,11 +3,11 @@
 #'
 #' The function generates a single-species record table containing individual
 #' IDs, e.g. for (spatial) capture-recapture analyses. It prepares input for
-#' the function \code{\link{spatialDetectionHistory}}.
+#' the function \code{\link[camtrapR]{spatialDetectionHistory}}.
 #'
 #' The function can handle a number of different ways of storing images.
 #' In every case, images need to be stored in a species directory first
-#' (e.g. using function \code{\link{getSpeciesImages}}). Station subdirectories
+#' (e.g. using function \code{\link[camtrapR]{getSpeciesImages}}). Station subdirectories
 #' are optional.
 #'
 #' As with species identification, individuals can be identified in 2 different
@@ -35,7 +35,7 @@
 #' "AmbientTemperature" or "MoonPhase" can be extracted if specified in
 #' \code{additionalMetadataTags}. Multiple names can be specified as a
 #' character vector as: \code{c(Tag1, Tag2, ...)}. Because they are not
-#' standardized, function \code{\link{exifTagNames}} provides a vector of all
+#' standardized, function \code{\link[camtrapR]{exifTagNames}} provides a vector of all
 #' available tag names. The metadata tags thus extracted may be used as
 #' individual covariates in spatial capture-recapture models.
 #'
