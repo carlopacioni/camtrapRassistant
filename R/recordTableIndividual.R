@@ -3,11 +3,11 @@
 #'
 #' The function generates a single-species record table containing individual
 #' IDs, e.g. for (spatial) capture-recapture analyses. It prepares input for
-#' the function \code{\link{spatialDetectionHistory}}.
+#' the function \code{\link[camtrapR]{spatialDetectionHistory}}.
 #'
 #' The function can handle a number of different ways of storing images.
 #' In every case, images need to be stored in a species directory first
-#' (e.g. using function \code{\link{getSpeciesImages}}). Station subdirectories
+#' (e.g. using function \code{\link[camtrapR]{getSpeciesImages}}). Station subdirectories
 #' are optional.
 #'
 #' As with species identification, individuals can be identified in 2 different
@@ -35,7 +35,7 @@
 #' "AmbientTemperature" or "MoonPhase" can be extracted if specified in
 #' \code{additionalMetadataTags}. Multiple names can be specified as a
 #' character vector as: \code{c(Tag1, Tag2, ...)}. Because they are not
-#' standardized, function \code{\link{exifTagNames}} provides a vector of all
+#' standardized, function \code{\link[camtrapR]{exifTagNames}} provides a vector of all
 #' available tag names. The metadata tags thus extracted may be used as
 #' individual covariates in spatial capture-recapture models.
 #'
@@ -47,8 +47,60 @@
 #' ("metadata") of from directory names ("directory")
 #' @param metadataIDTag character. In custom image metadata, the individual ID
 #' tag name.
+#' @param hasStationFolders Logical. Whether station column is taken from directory
 #' @inheritParams recordTableAssist
 #' @inheritParams addStationCameraID
+#'
+#' #' Af you use image metadata tags for identification, the tags must be written
+#' to the image metadata. The function cannot read tags from .xmp sidecar
+#' files. Make sure you set the preferences of your image management software
+#' accordingly. In DigiKam, go to Settings/Configure digiKam/Metadata. There,
+#' make sure "Write to sidecar files" is unchecked.
+#'
+#' Please note the section about defining argument \code{timeZone} in the
+#' vignette on data extraction (accessible via
+#' \code{vignette("DataExtraction")} or online
+#' (\url{https://cran.r-project.org/package=camtrapR/vignettes/camtrapr3.pdf})).
+#'
+#' @author Juergen Niedballa
+#'
+#' @references Phil Harvey's ExifTool \url{https://exiftool.org/}
+#'
+#' @examples
+#'
+#'
+#' \dontrun{   # the examples run too long to pass CRAN tests
+#'
+#'  wd_images_ID_individual <- system.file("pictures/sample_images_indiv_tag/LeopardCat",
+#'                                         package = "camtrapR")
+#'  # missing space in species = "LeopardCat" is because of CRAN package policies
+#'  # note argument additionalMetadataTags: contains tag names as returned by function exifTagNames
+#'
+#'  if (Sys.which("exiftool") != ""){        # only run these examples if ExifTool is available
+#'
+#'  rec_table_pbe <- recordTableIndividualAssist(inDir                  = wd_images_ID_individual,
+#'                                         minDeltaTime           = 60,
+#'                                         deltaTimeComparedTo    = "lastRecord",
+#'                                         StationIDfrom          = "filename",
+#'                                         individualIDfrom       = "metadata",
+#'                                         camerasIndependent     = FALSE,
+#'                                         writecsv               = FALSE,
+#'                                         metadataIDTag          = "individual",
+#'                                         additionalMetadataTags = c("EXIF:Model", "EXIF:Make"),
+#'                                         timeZone               = "Asia/Kuala_Lumpur"
+#'                                         speciesIDfrom          = "directory"
+#'  )
+#'
+#'
+#'
+#' } else {
+#' # show function output if ExifTool is not available
+#' message("ExifTool is not available. Cannot test function. Loading recordTableSample instead")
+#' data(recordTableSample)
+#' }
+#' }
+#'
+#'
 #' @export
 recordTableIndividualAssist <- function(inDir,
                                   cameraID,

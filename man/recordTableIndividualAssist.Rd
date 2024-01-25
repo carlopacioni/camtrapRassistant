@@ -160,12 +160,12 @@ used if the directory filepath contains extra directories beyond 'Species'.}
 \description{
 The function generates a single-species record table containing individual
 IDs, e.g. for (spatial) capture-recapture analyses. It prepares input for
-the function \code{\link{spatialDetectionHistory}}.
+the function \code{\link[camtrapR]{spatialDetectionHistory}}.
 }
 \details{
 The function can handle a number of different ways of storing images.
 In every case, images need to be stored in a species directory first
-(e.g. using function \code{\link{getSpeciesImages}}). Station subdirectories
+(e.g. using function \code{\link[camtrapR]{getSpeciesImages}}). Station subdirectories
 are optional.
 
 As with species identification, individuals can be identified in 2 different
@@ -193,11 +193,53 @@ the default settings. Manufacturer-specific Exif metadata tags such as
 "AmbientTemperature" or "MoonPhase" can be extracted if specified in
 \code{additionalMetadataTags}. Multiple names can be specified as a
 character vector as: \code{c(Tag1, Tag2, ...)}. Because they are not
-standardized, function \code{\link{exifTagNames}} provides a vector of all
+standardized, function \code{\link[camtrapR]{exifTagNames}} provides a vector of all
 available tag names. The metadata tags thus extracted may be used as
 individual covariates in spatial capture-recapture models.
 
 \code{eventSummaryColumn} and \code{eventSummaryFunction} can be used to
 extract summary statistics for independent sampling events. See documentations
 for these functions in \code{camtrapR}.
+}
+\examples{
+
+
+\dontrun{   # the examples run too long to pass CRAN tests
+
+ wd_images_ID_individual <- system.file("pictures/sample_images_indiv_tag/LeopardCat",
+                                        package = "camtrapR")
+ # missing space in species = "LeopardCat" is because of CRAN package policies
+ # note argument additionalMetadataTags: contains tag names as returned by function exifTagNames
+
+ if (Sys.which("exiftool") != ""){        # only run these examples if ExifTool is available
+
+ rec_table_pbe <- recordTableIndividualAssist(inDir                  = wd_images_ID_individual,
+                                        minDeltaTime           = 60,
+                                        deltaTimeComparedTo    = "lastRecord",
+                                        StationIDfrom          = "filename",
+                                        individualIDfrom       = "metadata",
+                                        camerasIndependent     = FALSE,
+                                        writecsv               = FALSE,
+                                        metadataIDTag          = "individual",
+                                        additionalMetadataTags = c("EXIF:Model", "EXIF:Make"),
+                                        timeZone               = "Asia/Kuala_Lumpur"
+                                        speciesIDfrom          = "directory"
+ )
+
+
+
+} else {
+# show function output if ExifTool is not available
+message("ExifTool is not available. Cannot test function. Loading recordTableSample instead")
+data(recordTableSample)
+}
+}
+
+
+}
+\references{
+Phil Harvey's ExifTool \url{https://exiftool.org/}
+}
+\author{
+Juergen Niedballa
 }

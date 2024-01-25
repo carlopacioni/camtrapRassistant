@@ -225,7 +225,7 @@ necessary to change it if the default was changed in these programs.
 Many digital images contain Exif metadata tags such as "AmbientTemperature" or
 "MoonPhase" that can be extracted if specified in \code{metadataTags}. Because
 these are manufacturer-specific and not standardized, function
-\code{\link{exifTagNames}} provides a vector of all available tag names.
+\code{\link[camtrapR]{exifTagNames}} provides a vector of all available tag names.
 Multiple names can be specified as a character vector as: \code{c(Tag1, Tag2,
 ...)}. The metadata tags extracted may then be used as covariates in
 subsequent analyses.
@@ -236,7 +236,7 @@ Phil Harvey to extract metadata from images. See
 download, and Vignette 1. Organising Raw Camera Trap Images in camtrapR,
 accessible via
 \url{https://cran.r-project.org/web/packages/camtrapR/vignettes/ImageOrganisation.html#exiftool}
-, or \code{\link{exiftoolPath}} for instructions on how to install exiftool
+, or \code{\link[camtrapR]{exiftoolPath}} for instructions on how to install exiftool
 for permanent or temporary access.
 
 \code{minDeltaTime} is a criterion for temporal independence of species
@@ -267,7 +267,7 @@ likely to detect the same animals at the same time, however in some instances
 \code{exclude} can be used to exclude 'Species' directories containing
 irrelevant images (e.g. c("team", "blank", "unidentified")). \code{stationCol}
 can be set to match the station column name in the camera trap station table
-(see \code{\link{camtraps}}).
+(see \code{\link[camtrapR]{camtraps}}).
 }
 \note{
 The results of a number of other functions will depend on the output of
@@ -275,7 +275,7 @@ this function (namely on the arguments: \code{exclude} for excluding
 species, and \code{minDeltaTime} and \code{deltaTimeComparedTo} for temporal
 independence).
 
-\tabular{l}{ \code{\link[camtrapR]{detectionMaps}} \cr \code{\link{detectionHistory}}
+\tabular{l}{ \code{\link[camtrapR]{detectionMaps}} \cr \code{\link[camtrapR]{detectionHistory}}
 \cr \code{\link[camtrapR]{activityHistogram}} \cr \code{\link[camtrapR]{activityDensity}} \cr
 \code{\link[camtrapR]{activityRadial}} \cr \code{\link[camtrapR]{activityOverlap}} \cr
 \code{\link[camtrapR]{activityHistogram}} \cr \code{\link[camtrapR]{surveyReport}} \cr }
@@ -311,7 +311,7 @@ if (Sys.which("exiftool") != ""){        # only run these examples if ExifTool i
  )
  # note argument additionalMetadataTags: it contains tag names as returned by function exifTagNames
 
- rec.db2 <- recordTable(inDir                  = wd_images_ID,
+ rec.db2 <- recordTableAssist(inDir                  = wd_images_ID,
                         speciesIDfrom          = "directory",
                         minDeltaTime           = 60,
                         deltaTimeComparedTo    = "lastRecord",
