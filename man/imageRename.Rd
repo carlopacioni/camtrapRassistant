@@ -119,7 +119,7 @@ within the station folders.
 ### "trial" run. create a table with file names after renaming, but don't copy images.
 
 # first, find sample image directory in package directory:
-wd_images_raw <- system.file("pictures/raw_images", package = "camtrapRassistant")
+wd_images_raw <- system.file("pictures/raw_images", package = "camtrapR")
 
 if (Sys.which("exiftool") != ""){        # only run this example if ExifTool is available
 
@@ -138,7 +138,7 @@ if (Sys.which("exiftool") != ""){        # only run this example if ExifTool is 
  # define image directories
 
  # raw image location
- wd_images_raw <- system.file("pictures/raw_images", package = "camtrapRassistant")
+ wd_images_raw <- system.file("pictures/raw_images", package = "camtrapR")
  # destination for renamed images
  wd_images_raw_renamed <- file.path(tempdir(), "raw_images_renamed")
 
