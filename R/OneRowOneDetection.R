@@ -22,7 +22,7 @@
 #' recTest
 #'
 #' # Replicate rows
-#' OROD <- oneRowOneDetection(W2L, countsName = "Group1Count")
+#' OROD <- oneRowOneDetection(recTest, countsName = "Group1Count")
 #' OROD
 #'
 oneRowOneDetection <- function(intable, countsName) {

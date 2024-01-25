@@ -38,7 +38,7 @@ Group1Sex=sample(c("Male", "Female", NA), 5, replace =  TRUE) # The sex of G1
 recTest
 
 # Replicate rows
-OROD <- oneRowOneDetection(W2L, countsName = "Group1Count")
+OROD <- oneRowOneDetection(recTest, countsName = "Group1Count")
 OROD
 
 }
