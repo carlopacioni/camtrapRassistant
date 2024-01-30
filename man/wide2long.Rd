@@ -56,12 +56,13 @@ can be used to set the order of the columns if needs be (see \link[data.table:se
 \examples{
 # make up a recordTable where multiple individuals in the same image
 # are identified with the prefix Ind1 or Ind2
+library(data.table)
 recTest <- data.table(fileName=LETTERS[1:5],
 Count=c(rep(2,4), 1),
 Ind1Species= c(rep("sambar", 4), "Fallow"),
-Ind1Sex=sample(c("Male", "Female", NA), 5, replace = T),
+Ind1Sex=sample(c("Male", "Female", NA), 5, replace = TRUE),
 Ind2Species= c(rep("sambar", 4), NA),
-Ind2Sex=c(sample(c("M", "F", NA), 4, replace = T), NA) )
+Ind2Sex=c(sample(c("M", "F", NA), 4, replace = TRUE), NA) )
 recTest
 wide2long(recTest, pattern = c("Species$", "Sex$"), variableName="Individual",
 valueNames = c("Species", "Sex"))
@@ -75,9 +76,9 @@ recTest <- data.table(fileName=LETTERS[1:5],
 Group1Count=c(rep(2,4), 1), # The count of individuals in the first group (G1)
 Group2Count=c(rep(1,4), NA), # The count of individuals in the second group (G2)
 Group1Species= c(rep("sambar", 4), "Fallow"), # The species of G1
-Group1Sex=sample(c("Male", "Female", NA), 5, replace = T), # The sex of G1
+Group1Sex=sample(c("Male", "Female", NA), 5, replace = TRUE), # The sex of G1
 Group2Species= c(rep("sambar", 4), NA), # The species of G2
-Group2Sex=c(sample(c("M", "F", NA), 4, replace = T), NA) # The sex of G2
+Group2Sex=c(sample(c("M", "F", NA), 4, replace = TRUE), NA) # The sex of G2
 )
 recTest
 
