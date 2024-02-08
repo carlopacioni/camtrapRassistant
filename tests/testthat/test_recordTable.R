@@ -123,6 +123,6 @@ test_that("warnings are correct", {
                              speciesIDfrom                 = "directory",
                              additionalMetadataTags = c("EXIF:Model", "NonExistingTag"),
                              timeZone               = "Asia/Kuala_Lumpur"),
-                 "metadata tag(s)  not found in image metadata:   NonExistingTag")
+                 "not found in image metadata:   NonExistingTag")
 
 })

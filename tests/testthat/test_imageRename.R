@@ -12,6 +12,6 @@ test_that("imageRename throws error if inDir doesn't exist", {
 
 
 test_that("imageRename throws error if inDir doesn't have subdirectories", {
-  expect_error(imageRename(inDir = list.dirs(wd_images_ID_species)[3]),   # pointing to StationA/PBE, which doesn't have subdirectories
-               "inDir contains no station directories")
+  expect_error(imageRename(inDir = list.dirs(wd_images_ID_species)[4], hasCameraFolders= TRUE),
+               "is not TRUE")
 })
