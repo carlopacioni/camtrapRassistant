@@ -1,4 +1,4 @@
-context("recordTable")
+#context("recordTable")
 library(camtrapRassistant)
 
 # run recordTable
@@ -69,21 +69,21 @@ rec_table3b <- recordTableAssist(inDir              = wd_images_ID_species,
 # Test section
 
 test_that("recordTable output has correct class", {
-  expect_is(rec_table0,   "data.frame")
-  expect_is(rec_table1,   "data.frame")
-  expect_is(rec_table2_1, "data.frame")
-  expect_is(rec_table2_2, "data.frame")
-  expect_is(rec_table3a,  "data.frame")
-  expect_is(rec_table3b,  "data.frame")
+  expect_type(rec_table0,   "data.frame")
+  expect_type(rec_table1,   "data.frame")
+  expect_type(rec_table2_1, "data.frame")
+  expect_type(rec_table2_2, "data.frame")
+  expect_type(rec_table3a,  "data.frame")
+  expect_type(rec_table3b,  "data.frame")
 })
 
 test_that("recordTable output has correct dimensions", {
-  expect_equal(dim(rec_table0),   c(56,12))
-  expect_equal(dim(rec_table1),   c(40,14))
-  expect_equal(dim(rec_table2_1), c(39,15))
-  expect_equal(dim(rec_table2_2), c(39,16))
-  expect_equal(dim(rec_table3a),  c(67,12))
-  expect_equal(dim(rec_table3b),  c(55,12))
+  expect_equal(dim(rec_table0),   c(56,11))
+  expect_equal(dim(rec_table1),   c(40,13))
+  expect_equal(dim(rec_table2_1), c(39,13))
+  expect_equal(dim(rec_table2_2), c(39,13))
+  expect_equal(dim(rec_table3a),  c(67,11))
+  expect_equal(dim(rec_table3b),  c(55,11))
 })
 
 test_that("removeDuplicateRecords works", {
@@ -95,7 +95,7 @@ test_that("errors are correct", {
   expect_error(recordTableAssist(inDir               = wd_images_ID_species,
                            speciesIDfrom                 = "Directory",
                            timeZone               = "Asia/Kuala_Lumpur"),
-               "'arg' should be one of")
+               "speciesIDfrom' must be 'metadata' or 'directory")
   expect_error(recordTableAssist(inDir               = wd_images_ID_species,
                            speciesIDfrom              = "directory",
                            cameraIDfrom            = "directory",
@@ -106,17 +106,15 @@ test_that("errors are correct", {
                            cameraIDfrom            = "Filename",
                            camerasIndependent  = TRUE,
                            timeZone               = "Asia/Kuala_Lumpur"),
-               "'arg' should be one of")
+               "cameraIDfrom can only be 'filename', 'directory', or missing")
 })
 
 test_that("time zone message works", {
-  expect_message(recordTableAssist(inDir     = wd_images_ID_species,
+  expect_warning(recordTableAssist(inDir     = wd_images_ID_species,
                              speciesIDfrom    = "directory"),
-                 "Warning: timeZone is not specified. Assuming UTC
-StationA:      8 images    0 duplicates removed      |=======             |   33%
-StationB:     23 images    6 duplicates removed      |=============       |   67%
-StationC:     37 images    6 duplicates removed      |====================|  100%")
-})
+                 "timeZone is not specified. Assuming UTC"
+
+                 )})
 
 
 test_that("warnings are correct", {
@@ -125,6 +123,6 @@ test_that("warnings are correct", {
                              speciesIDfrom                 = "directory",
                              additionalMetadataTags = c("EXIF:Model", "NonExistingTag"),
                              timeZone               = "Asia/Kuala_Lumpur"),
-                 " not found in image metadata:  NonExistingTag")
+                 "metadata tag(s)  not found in image metadata:   NonExistingTag")
 
 })
