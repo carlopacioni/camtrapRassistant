@@ -1,12 +1,12 @@
-context("imageRename")
-library(camtrapR)
+#context("imageRename")
+library(camtrapRassistant)
 
 
 wd_images_ID_species <- system.file("pictures/sample_images_species_dir", package = "camtrapR")
 
 
 test_that("imageRename throws error if inDir doesn't exist", {
-  expect_error(imageRename(inDir = paste(wd_images_ID_species, "blabla", sep = "")),
+  expect_error(imageRename(inDir = paste(wd_images_ID_species, "blabla", sep = ""),hasCameraFolders= FALSE),
                "Could not find inDir")
 })
 
