@@ -25,3 +25,6 @@ Imports:
     parallel
 URL: https://github.com/carlopacioni/camtrapRassistant
 BugReports: https://github.com/carlopacioni/camtrapRassistant/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

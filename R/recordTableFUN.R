@@ -355,5 +355,5 @@ recordTableFUN <- function( inDir,
     }
   write.csv(record.table, file = outtable_filename)
   }
-  return(record.table)
+  return(setDF(record.table))
 }
